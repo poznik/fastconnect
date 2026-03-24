@@ -19,6 +19,7 @@
 		A85EE7608C9865CAD7AE2EED /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF28665F4DC3BEB829645F /* SettingsWindowController.swift */; };
 		AA6E98090FA0CC4CD060662F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4470DA2623F73BB1F0C80DEE /* SettingsView.swift */; };
 		AD26B9643FB684D05BA9AB23 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE871AAF84ECB2170BEB2BB /* main.swift */; };
+		C0D53B5DB8ECDA9D41AAD87E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA2C82291770A1D557F3630 /* Assets.xcassets */; };
 		CA8A358290CEDFEBC6D312DB /* LaunchAtLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6456762DF944EE1BC1DDFE0 /* LaunchAtLoginService.swift */; };
 		E1B5FEF6EB1110CBF68C1561 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A33C6C38465DA9802CEA99F /* AppState.swift */; };
 		F291D1EA00A0B40C95370779 /* VPNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A580C803EE95DC9BC74E425 /* VPNService.swift */; };
@@ -39,6 +40,7 @@
 		9EA5B3DD3DFE519A3F978C83 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		A6470B71D4CE85EBA372D699 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		BD051ED81B3F04E5F2614CD2 /* Disconnected.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Disconnected.icns; sourceTree = "<group>"; };
+		DCA2C82291770A1D557F3630 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0247D1EEEBEB089ED388137 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		F6456762DF944EE1BC1DDFE0 /* LaunchAtLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +65,7 @@
 		B4438A6B384D41F89E468DDE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DCA2C82291770A1D557F3630 /* Assets.xcassets */,
 				4E68FA2EA13D7383435604C3 /* Connected.icns */,
 				BD051ED81B3F04E5F2614CD2 /* Disconnected.icns */,
 			);
@@ -157,6 +160,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0D53B5DB8ECDA9D41AAD87E /* Assets.xcassets in Resources */,
 				1D197B62BB731395D8F7CC01 /* Connected.icns in Resources */,
 				A1E37439D9095BD9C4F1FF3D /* Disconnected.icns in Resources */,
 			);
@@ -194,7 +198,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				ICON_FILE = Disconnected;
 				INFOPLIST_FILE = FastConnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -202,7 +206,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fastconnect.app;
 				PRODUCT_NAME = FastConnect;
 				SDKROOT = macosx;
@@ -215,7 +219,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				ICON_FILE = Disconnected;
 				INFOPLIST_FILE = FastConnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -223,7 +227,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fastconnect.app;
 				PRODUCT_NAME = FastConnect;
 				SDKROOT = macosx;

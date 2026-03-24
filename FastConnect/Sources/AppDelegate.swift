@@ -15,15 +15,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var disconnectMenuItem: NSMenuItem!
     private var settingsWindowController: SettingsWindowController!
 
-    private var connectedIcon: NSImage?
-    private var disconnectedIcon: NSImage?
     private var cancellables = Set<AnyCancellable>()
     private var terminationPending = false
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         logger.info("AppDelegate", "Приложение запущено.")
-        connectedIcon = loadIcon(named: "Connected")
-        disconnectedIcon = loadIcon(named: "Disconnected")
         settingsWindowController = SettingsWindowController(appState: appState)
 
         appState.loadInitialStatus()
@@ -86,7 +82,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.image = disconnectedIcon
         statusItem.button?.imagePosition = .imageOnly
 
         statusMenu = NSMenu()
@@ -144,7 +139,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         connectMenuItem.isEnabled = status.allowsConnect
         disconnectMenuItem.title = status.disconnectMenuTitle
         disconnectMenuItem.isEnabled = status.allowsDisconnect
-        statusItem.button?.image = status.trayIconName == "Connected" ? connectedIcon : disconnectedIcon
+        updateStatusBarIcon(isVPNConnected: status.isVPNConnected)
     }
 
     private func finishTerminationIfNeeded(for status: VPNConnectionStatus) {
@@ -166,13 +161,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
 
-    private func loadIcon(named name: String) -> NSImage? {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "icns"),
-              let icon = NSImage(contentsOf: url) else {
-            return nil
+    private func updateStatusBarIcon(isVPNConnected: Bool) {
+        let assetName = isVPNConnected ? "vpn_lock_closed" : "vpn_lock_open"
+
+        guard let icon = NSImage(named: NSImage.Name(assetName)) else {
+            logger.error("AppDelegate", "Не удалось загрузить asset status bar иконки: \(assetName)")
+            return
         }
 
+        icon.isTemplate = false
         icon.size = NSSize(width: 18, height: 18)
-        return icon
+        statusItem.button?.image = icon
     }
 }

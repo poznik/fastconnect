@@ -20,8 +20,10 @@
   - `Настройки...`
   - `Выйти`
 - Две иконки состояния:
-  - `Disconnected.icns` для отключенного VPN и иконки `.app`
-  - `Connected.icns` для активного VPN
+  - `vpn_lock_open` для отключенного VPN в menubar
+  - `vpn_lock_closed` для активного VPN в menubar
+- Иконка приложения `.app`:
+  - `Disconnected.icns`
 - Окно настроек с полями:
   - `VPN host`
   - `Номер профиля`

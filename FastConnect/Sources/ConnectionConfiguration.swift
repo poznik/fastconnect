@@ -81,12 +81,7 @@ enum VPNConnectionStatus: Equatable {
         }
     }
 
-    var trayIconName: String {
-        switch self {
-        case .connected:
-            "Connected"
-        default:
-            "Disconnected"
-        }
+    var isVPNConnected: Bool {
+        self == .connected
     }
 }
