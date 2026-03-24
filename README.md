@@ -139,6 +139,21 @@ open .signedbuild/Build/Products/Debug/FastConnect.app
 - для проверки уведомлений используй именно обычную signed debug-сборку из Xcode или из `.signedbuild`;
 - не запускай сборку, собранную с `CODE_SIGNING_ALLOWED=NO`, если нужен корректный prompt разрешений уведомлений.
 
+## Готовый билд
+
+В репозитории лежит готовый архив для распространения:
+
+- `dist/FastConnect-macos-arm64-release.zip`
+- `dist/FastConnect-macos-arm64-release.zip.sha256`
+
+Это `Release`-сборка для `macOS arm64`.
+
+Нюансы распространения:
+
+- архив собран локально и подписан как `Sign to Run Locally`;
+- приложение не notarized;
+- на машинах коллег macOS может запросить подтверждение первого запуска через `Open` в контекстном меню или через настройки безопасности.
+
 ## Ограничения
 
 - Приложение рассчитано на конкретный CLI-flow AnyConnect с выбором профиля по номеру.

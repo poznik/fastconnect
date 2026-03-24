@@ -1,6 +1,7 @@
 .DS_Store
 .build/
 .signedbuild/
+.releasebuild/
 DerivedData/
 
 *.log
@@ -23,4 +24,3 @@ Package.resolved
 # Local app data and diagnostics
 Library/
 tmp/
-
