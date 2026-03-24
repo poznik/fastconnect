@@ -20,15 +20,6 @@ enum AppNotificationEvent {
             return "Отключен VPN"
         }
     }
-
-    var iconName: String {
-        switch self {
-        case .connectStarted, .connected:
-            return "Connected"
-        case .disconnectStarted, .disconnected:
-            return "Disconnected"
-        }
-    }
 }
 
 @MainActor
@@ -37,15 +28,7 @@ final class AppNotificationService: NSObject, UNUserNotificationCenterDelegate {
 
     private let logger: AppLogger
     private let center = UNUserNotificationCenter.current()
-    private let fileManager = FileManager.default
     private var authorizationRequestScheduled = false
-    private lazy var notificationAssetsDirectory: URL = {
-        fileManager.homeDirectoryForCurrentUser
-            .appendingPathComponent("Library", isDirectory: true)
-            .appendingPathComponent("Caches", isDirectory: true)
-            .appendingPathComponent("FastConnect", isDirectory: true)
-            .appendingPathComponent("NotificationAssets", isDirectory: true)
-    }()
 
     init(logger: AppLogger) {
         self.logger = logger
@@ -106,12 +89,8 @@ final class AppNotificationService: NSObject, UNUserNotificationCenterDelegate {
         content.title = event.title
         content.sound = .default
 
-        if let attachment = makeAttachment(for: event) {
-            content.attachments = [attachment]
-        }
-
         let request = UNNotificationRequest(
-            identifier: "fastconnect.\(event.iconName).\(UUID().uuidString)",
+            identifier: "fastconnect.\(UUID().uuidString)",
             content: content,
             trigger: nil
         )
@@ -143,29 +122,6 @@ final class AppNotificationService: NSObject, UNUserNotificationCenterDelegate {
             return "ephemeral"
         @unknown default:
             return "unknown"
-        }
-    }
-
-    private func makeAttachment(for event: AppNotificationEvent) -> UNNotificationAttachment? {
-        do {
-            try fileManager.createDirectory(at: notificationAssetsDirectory, withIntermediateDirectories: true)
-
-            guard let sourceURL = Bundle.main.url(forResource: event.iconName, withExtension: "icns"),
-                  let image = NSImage(contentsOf: sourceURL),
-                  let tiff = image.tiffRepresentation,
-                  let bitmap = NSBitmapImageRep(data: tiff),
-                  let pngData = bitmap.representation(using: .png, properties: [:]) else {
-                logger.error("Notifications", "Не удалось подготовить иконку '\(event.iconName)' для уведомления.")
-                return nil
-            }
-
-            let destinationURL = notificationAssetsDirectory.appendingPathComponent("\(event.iconName).png")
-            try pngData.write(to: destinationURL, options: .atomic)
-
-            return try UNNotificationAttachment(identifier: event.iconName, url: destinationURL)
-        } catch {
-            logger.error("Notifications", "Не удалось создать attachment для уведомления: \(error.localizedDescription)")
-            return nil
         }
     }
 }
