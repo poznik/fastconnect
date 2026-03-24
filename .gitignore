@@ -1,0 +1,26 @@
+.DS_Store
+.build/
+.signedbuild/
+DerivedData/
+
+*.log
+*.swp
+*.tmp
+
+FastConnect.xcodeproj/project.xcworkspace/xcuserdata/
+FastConnect.xcodeproj/xcuserdata/
+*.xcuserdatad/
+*.xcuserstate
+
+.swiftpm/
+Package.resolved
+
+# Local macOS artifacts
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Local app data and diagnostics
+Library/
+tmp/
+

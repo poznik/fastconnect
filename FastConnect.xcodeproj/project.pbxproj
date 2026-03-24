@@ -1,0 +1,380 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1103D7B98CFCDFD829D7EBED /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA5B3DD3DFE519A3F978C83 /* AppLogger.swift */; };
+		1D197B62BB731395D8F7CC01 /* Connected.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4E68FA2EA13D7383435604C3 /* Connected.icns */; };
+		37566BE2AE49A2BC563DB7E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD10D083B2FA75D0ECA36D /* AppDelegate.swift */; };
+		3BE778AF5C27399DA9E5550F /* ConnectionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879692A0F6AED324A2F33D90 /* ConnectionConfiguration.swift */; };
+		682AC5CE30F4E23F9DAAAAE3 /* AppNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7866C2B4E9AFBD188CAE2779 /* AppNotificationService.swift */; };
+		74BB8A37AF68A7A64D701778 /* TOTPGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425ED64F72A1FF7A64D050D5 /* TOTPGenerator.swift */; };
+		8E0A0216CCE27C4F613C0CAC /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6470B71D4CE85EBA372D699 /* SettingsStore.swift */; };
+		91A3620D4873B35FC23E4B6A /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0247D1EEEBEB089ED388137 /* KeychainService.swift */; };
+		A1E37439D9095BD9C4F1FF3D /* Disconnected.icns in Resources */ = {isa = PBXBuildFile; fileRef = BD051ED81B3F04E5F2614CD2 /* Disconnected.icns */; };
+		A85EE7608C9865CAD7AE2EED /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF28665F4DC3BEB829645F /* SettingsWindowController.swift */; };
+		AA6E98090FA0CC4CD060662F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4470DA2623F73BB1F0C80DEE /* SettingsView.swift */; };
+		AD26B9643FB684D05BA9AB23 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE871AAF84ECB2170BEB2BB /* main.swift */; };
+		CA8A358290CEDFEBC6D312DB /* LaunchAtLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6456762DF944EE1BC1DDFE0 /* LaunchAtLoginService.swift */; };
+		E1B5FEF6EB1110CBF68C1561 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A33C6C38465DA9802CEA99F /* AppState.swift */; };
+		F291D1EA00A0B40C95370779 /* VPNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A580C803EE95DC9BC74E425 /* VPNService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		17BD10D083B2FA75D0ECA36D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1BE871AAF84ECB2170BEB2BB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		23FF28665F4DC3BEB829645F /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		425ED64F72A1FF7A64D050D5 /* TOTPGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOTPGenerator.swift; sourceTree = "<group>"; };
+		4470DA2623F73BB1F0C80DEE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4A580C803EE95DC9BC74E425 /* VPNService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNService.swift; sourceTree = "<group>"; };
+		4E68FA2EA13D7383435604C3 /* Connected.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Connected.icns; sourceTree = "<group>"; };
+		6A33C6C38465DA9802CEA99F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		7866C2B4E9AFBD188CAE2779 /* AppNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNotificationService.swift; sourceTree = "<group>"; };
+		7E6F415488E9D4455644F01A /* FastConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		879692A0F6AED324A2F33D90 /* ConnectionConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfiguration.swift; sourceTree = "<group>"; };
+		9EA5B3DD3DFE519A3F978C83 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		A6470B71D4CE85EBA372D699 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		BD051ED81B3F04E5F2614CD2 /* Disconnected.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Disconnected.icns; sourceTree = "<group>"; };
+		E0247D1EEEBEB089ED388137 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		F6456762DF944EE1BC1DDFE0 /* LaunchAtLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		6F8330C53423BCE0B280DC84 = {
+			isa = PBXGroup;
+			children = (
+				ED6ECDB53F725FC2FA946E80 /* FastConnect */,
+				8CD1C949F5DCA1238ADE7752 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8CD1C949F5DCA1238ADE7752 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E6F415488E9D4455644F01A /* FastConnect.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4438A6B384D41F89E468DDE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4E68FA2EA13D7383435604C3 /* Connected.icns */,
+				BD051ED81B3F04E5F2614CD2 /* Disconnected.icns */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B7EB1231A99C7C7F518A01EF /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				17BD10D083B2FA75D0ECA36D /* AppDelegate.swift */,
+				9EA5B3DD3DFE519A3F978C83 /* AppLogger.swift */,
+				7866C2B4E9AFBD188CAE2779 /* AppNotificationService.swift */,
+				6A33C6C38465DA9802CEA99F /* AppState.swift */,
+				879692A0F6AED324A2F33D90 /* ConnectionConfiguration.swift */,
+				E0247D1EEEBEB089ED388137 /* KeychainService.swift */,
+				F6456762DF944EE1BC1DDFE0 /* LaunchAtLoginService.swift */,
+				1BE871AAF84ECB2170BEB2BB /* main.swift */,
+				A6470B71D4CE85EBA372D699 /* SettingsStore.swift */,
+				4470DA2623F73BB1F0C80DEE /* SettingsView.swift */,
+				23FF28665F4DC3BEB829645F /* SettingsWindowController.swift */,
+				425ED64F72A1FF7A64D050D5 /* TOTPGenerator.swift */,
+				4A580C803EE95DC9BC74E425 /* VPNService.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		ED6ECDB53F725FC2FA946E80 /* FastConnect */ = {
+			isa = PBXGroup;
+			children = (
+				B4438A6B384D41F89E468DDE /* Resources */,
+				B7EB1231A99C7C7F518A01EF /* Sources */,
+			);
+			path = FastConnect;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4D8147653CB3E978589CD1C8 /* FastConnect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0BAB8B8E2E495D2A8EBFFB1 /* Build configuration list for PBXNativeTarget "FastConnect" */;
+			buildPhases = (
+				F3A27E6ABA45CFEBB7062D07 /* Sources */,
+				65C0DB82C2BA21C501BF2B8A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FastConnect;
+			packageProductDependencies = (
+			);
+			productName = FastConnect;
+			productReference = 7E6F415488E9D4455644F01A /* FastConnect.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		225C4E6DE980945C4A7EB074 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					4D8147653CB3E978589CD1C8 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F7B584194E5B3A6B6366959B /* Build configuration list for PBXProject "FastConnect" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 6F8330C53423BCE0B280DC84;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8CD1C949F5DCA1238ADE7752 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4D8147653CB3E978589CD1C8 /* FastConnect */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		65C0DB82C2BA21C501BF2B8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D197B62BB731395D8F7CC01 /* Connected.icns in Resources */,
+				A1E37439D9095BD9C4F1FF3D /* Disconnected.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F3A27E6ABA45CFEBB7062D07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37566BE2AE49A2BC563DB7E2 /* AppDelegate.swift in Sources */,
+				1103D7B98CFCDFD829D7EBED /* AppLogger.swift in Sources */,
+				682AC5CE30F4E23F9DAAAAE3 /* AppNotificationService.swift in Sources */,
+				E1B5FEF6EB1110CBF68C1561 /* AppState.swift in Sources */,
+				3BE778AF5C27399DA9E5550F /* ConnectionConfiguration.swift in Sources */,
+				91A3620D4873B35FC23E4B6A /* KeychainService.swift in Sources */,
+				CA8A358290CEDFEBC6D312DB /* LaunchAtLoginService.swift in Sources */,
+				8E0A0216CCE27C4F613C0CAC /* SettingsStore.swift in Sources */,
+				AA6E98090FA0CC4CD060662F /* SettingsView.swift in Sources */,
+				A85EE7608C9865CAD7AE2EED /* SettingsWindowController.swift in Sources */,
+				74BB8A37AF68A7A64D701778 /* TOTPGenerator.swift in Sources */,
+				F291D1EA00A0B40C95370779 /* VPNService.swift in Sources */,
+				AD26B9643FB684D05BA9AB23 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0F0DB86EBDB674BFC5967D8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ICON_FILE = Disconnected;
+				INFOPLIST_FILE = FastConnect/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fastconnect.app;
+				PRODUCT_NAME = FastConnect;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		68C1C97C8500C67641EF6A08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ICON_FILE = Disconnected;
+				INFOPLIST_FILE = FastConnect/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fastconnect.app;
+				PRODUCT_NAME = FastConnect;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F3263844EDDADDD5B236D504 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		F4FFB9B0F18DA78DB972573C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C0BAB8B8E2E495D2A8EBFFB1 /* Build configuration list for PBXNativeTarget "FastConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C1C97C8500C67641EF6A08 /* Debug */,
+				0F0DB86EBDB674BFC5967D8E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F7B584194E5B3A6B6366959B /* Build configuration list for PBXProject "FastConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4FFB9B0F18DA78DB972573C /* Debug */,
+				F3263844EDDADDD5B236D504 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 225C4E6DE980945C4A7EB074 /* Project object */;
+}
