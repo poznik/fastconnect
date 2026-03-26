@@ -25,6 +25,101 @@ enum VPNServiceError: LocalizedError {
 }
 
 final class VPNService {
+    private struct LineBuffer {
+        private var buffer = Data()
+
+        mutating func append(_ data: Data, emit: (String) -> Void) {
+            buffer.append(data)
+
+            while let newlineIndex = buffer.firstIndex(of: 0x0A) {
+                let lineData = buffer.prefix(upTo: newlineIndex)
+                buffer.removeSubrange(buffer.startIndex...newlineIndex)
+                emitLine(from: lineData, emit: emit)
+            }
+        }
+
+        mutating func flush(emit: (String) -> Void) {
+            guard !buffer.isEmpty else {
+                return
+            }
+
+            let lineData = buffer
+            buffer.removeAll(keepingCapacity: true)
+            emitLine(from: lineData, emit: emit)
+        }
+
+        private func emitLine(from data: Data, emit: (String) -> Void) {
+            guard var line = String(data: data, encoding: .utf8) else {
+                return
+            }
+
+            if line.hasSuffix("\r") {
+                line.removeLast()
+            }
+
+            emit(line)
+        }
+    }
+
+    private final class OutputCollector: @unchecked Sendable {
+        private let queue = DispatchQueue(label: "com.fastconnect.vpn.output")
+        private var stdoutBuffer = LineBuffer()
+        private var stderrBuffer = LineBuffer()
+        private var stdoutData = Data()
+        private var stderrData = Data()
+        private var stdoutClosed = false
+        private var stderrClosed = false
+        private let emitLine: @Sendable (String) -> Void
+
+        init(emitLine: @escaping @Sendable (String) -> Void) {
+            self.emitLine = emitLine
+        }
+
+        func handleStdout(chunk: Data, didClose: @escaping @Sendable () -> Void) {
+            queue.async {
+                guard !self.stdoutClosed else {
+                    return
+                }
+
+                if chunk.isEmpty {
+                    self.stdoutClosed = true
+                    self.stdoutBuffer.flush(emit: self.emitLine)
+                    didClose()
+                    return
+                }
+
+                self.stdoutData.append(chunk)
+                self.stdoutBuffer.append(chunk, emit: self.emitLine)
+            }
+        }
+
+        func handleStderr(chunk: Data, didClose: @escaping @Sendable () -> Void) {
+            queue.async {
+                guard !self.stderrClosed else {
+                    return
+                }
+
+                if chunk.isEmpty {
+                    self.stderrClosed = true
+                    self.stderrBuffer.flush(emit: self.emitLine)
+                    didClose()
+                    return
+                }
+
+                self.stderrData.append(chunk)
+                self.stderrBuffer.append(chunk, emit: self.emitLine)
+            }
+        }
+
+        func finalize() -> (stdout: Data, stderr: Data) {
+            queue.sync {
+                stdoutBuffer.flush(emit: emitLine)
+                stderrBuffer.flush(emit: emitLine)
+                return (stdoutData, stderrData)
+            }
+        }
+    }
+
     private final class ClosureOperation: Operation, @unchecked Sendable {
         private let block: () -> Void
 
@@ -75,7 +170,15 @@ final class VPNService {
         return parseState(from: output)
     }
 
-    func connect(vpnHost: String, profileSelection: String, username: String, password: String, totp: String, completion: @escaping @Sendable (Result<VPNConnectionStatus, Error>) -> Void) {
+    func connect(
+        vpnHost: String,
+        profileSelection: String,
+        username: String,
+        password: String,
+        totp: String,
+        progress: (@Sendable (String) -> Void)? = nil,
+        completion: @escaping @Sendable (Result<VPNConnectionStatus, Error>) -> Void
+    ) {
         queue.addOperation(ClosureOperation {
             do {
                 try self.terminateExistingVPNCLIProcesses()
@@ -90,7 +193,7 @@ final class VPNService {
                     password,
                     password,
                     totp
-                ], timeout: 60)
+                ], timeout: 60, outputHandler: progress)
 
                 Thread.sleep(forTimeInterval: 1.5)
                 let stateOutput = try self.runScript(["state"], timeout: 15)
@@ -111,10 +214,13 @@ final class VPNService {
         })
     }
 
-    func disconnect(completion: @escaping @Sendable (Result<VPNConnectionStatus, Error>) -> Void) {
+    func disconnect(
+        progress: (@Sendable (String) -> Void)? = nil,
+        completion: @escaping @Sendable (Result<VPNConnectionStatus, Error>) -> Void
+    ) {
         queue.addOperation(ClosureOperation {
             do {
-                _ = try self.runScript(["disconnect"], timeout: 30)
+                _ = try self.runScript(["disconnect"], timeout: 30, outputHandler: progress)
                 Thread.sleep(forTimeInterval: 1.5)
                 let stateOutput = try self.runScript(["state"], timeout: 15)
                 let state = self.parseState(from: stateOutput)
@@ -134,9 +240,13 @@ final class VPNService {
         })
     }
 
-    private func runScript(_ commands: [String], timeout: TimeInterval) throws -> String {
+    private func runScript(
+        _ commands: [String],
+        timeout: TimeInterval,
+        outputHandler: (@Sendable (String) -> Void)? = nil
+    ) throws -> String {
         let input = commands.joined(separator: "\n") + "\n"
-        return try runProcess(arguments: ["-s"], stdin: input, timeout: timeout)
+        return try runProcess(arguments: ["-s"], stdin: input, timeout: timeout, outputHandler: outputHandler)
     }
 
     private func terminateExistingVPNCLIProcesses() throws {
@@ -170,7 +280,12 @@ final class VPNService {
         logger.info("VPNService", "Висящие vpn CLI процессы завершены через SIGKILL.")
     }
 
-    private func runProcess(arguments: [String], stdin: String, timeout: TimeInterval) throws -> String {
+    private func runProcess(
+        arguments: [String],
+        stdin: String,
+        timeout: TimeInterval,
+        outputHandler: (@Sendable (String) -> Void)? = nil
+    ) throws -> String {
         guard FileManager.default.isExecutableFile(atPath: binaryURL.path) else {
             throw VPNServiceError.binaryNotFound
         }
@@ -186,6 +301,33 @@ final class VPNService {
         process.standardOutput = outputPipe
         process.standardError = errorPipe
         process.standardInput = inputPipe
+
+        let readGroup = DispatchGroup()
+        let shouldEmitRealtimeOutput = outputHandler != nil
+
+        let emitOutputLine: @Sendable (String) -> Void = { [logger] line in
+            guard shouldEmitRealtimeOutput, !line.isEmpty else {
+                return
+            }
+
+            logger.info("VPNCLI", line)
+            outputHandler?(line)
+        }
+        let collector = OutputCollector(emitLine: emitOutputLine)
+
+        readGroup.enter()
+        outputPipe.fileHandleForReading.readabilityHandler = { fileHandle in
+            collector.handleStdout(chunk: fileHandle.availableData) {
+                readGroup.leave()
+            }
+        }
+
+        readGroup.enter()
+        errorPipe.fileHandleForReading.readabilityHandler = { fileHandle in
+            collector.handleStderr(chunk: fileHandle.availableData) {
+                readGroup.leave()
+            }
+        }
 
         try process.run()
 
@@ -203,8 +345,15 @@ final class VPNService {
             throw VPNServiceError.commandTimedOut
         }
 
-        let stdout = String(data: outputPipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
-        let stderr = String(data: errorPipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
+        process.waitUntilExit()
+
+        _ = readGroup.wait(timeout: .now() + 2)
+        outputPipe.fileHandleForReading.readabilityHandler = nil
+        errorPipe.fileHandleForReading.readabilityHandler = nil
+
+        let output = collector.finalize()
+        let stdout = String(data: output.stdout, encoding: .utf8) ?? ""
+        let stderr = String(data: output.stderr, encoding: .utf8) ?? ""
         let combined = (stdout + stderr).trimmingCharacters(in: .whitespacesAndNewlines)
 
         guard process.terminationStatus == 0 else {

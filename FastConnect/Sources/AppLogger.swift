@@ -40,6 +40,21 @@ final class AppLogger: @unchecked Sendable {
         NSWorkspace.shared.open(logsDirectory)
     }
 
+    func openCurrentLogFileInDefaultApp() throws {
+        try createLogsDirectoryIfNeeded()
+
+        let fileURL = currentLogFileURL()
+        if !fileManager.fileExists(atPath: fileURL.path) {
+            try Data().write(to: fileURL, options: .atomic)
+        }
+
+        NSWorkspace.shared.open(fileURL)
+    }
+
+    func currentLogFileURL() -> URL {
+        logFileURL(for: Date())
+    }
+
     private func log(level: Level, category: String, message: String) {
         queue.async {
             do {

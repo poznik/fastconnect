@@ -1,0 +1,9 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="cutout-red">
+      <rect width="120" height="120" rx="12" fill="white"/>
+      <path d="M40.1006 14.377L108.641 106.057H79.8154L10.6348 14.377H40.1006ZM47.1465 105.444H10.6348L47.1465 68.6426V105.444ZM73.1279 50.5322V14.377H109L73.1279 50.5322Z" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="120" height="120" rx="12" fill="#E53935" mask="url(#cutout-red)"/>
+</svg>
